@@ -36,12 +36,12 @@ public class StartUp
         /*
          * search parameters, feel free to edit these
          */
-        final int MIN_DIMENSION = 1000;
-        final int MAX_DIMENSION = 1000;
+        final int MIN_DIMENSION = 350;
+        final int MAX_DIMENSION = 350;
         final int INC_DIMENSION = 20;
         final int MAX_DURATION = 2500;
         final double OBSTACLE_DENSITY = 0.25d;
-        final boolean CREATE_IMAGE = true; // slow!
+        final boolean CREATE_IMAGE = false; // slow!
         strategies.put("AStar (Euclidean)", new AStarSearch(new GraphSearch(), new EuclideanDistanceHeuristicFunction()));
         strategies.put("AStar (Diagonal)", new AStarSearch(new GraphSearch(), new DiagonalDistanceHeuristicFunction()));
         strategies.put("AStar (Manhatten)", new AStarSearch(new GraphSearch(), new ManhattenDistanceHeuristicFunction()));
