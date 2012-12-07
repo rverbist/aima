@@ -36,9 +36,9 @@ public class StartUp
         /*
          * search parameters, feel free to edit these
          */
-        final int MIN_DIMENSION = 350;
-        final int MAX_DIMENSION = 350;
-        final int INC_DIMENSION = 20;
+        final int MIN_DIMENSION = 10;
+        final int MAX_DIMENSION = 1000;
+        final int INC_DIMENSION = 100;
         final int MAX_DURATION = 2500;
         final double OBSTACLE_DENSITY = 0.25d;
         final boolean CREATE_IMAGE = false; // slow!

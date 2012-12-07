@@ -18,11 +18,11 @@ import domain.Point;
 import domain.TwoDimensionalMap;
 import domain.TwoDimensionalSpace;
 
-public class SearchTest
+public final class SearchTest
 {
-    static final String PATH_COST = "pathCost";
-    static final String MAX_QUEUE_SIZE = "maxQueueSize";
-    static final String NODES_EXPANDED = "nodesExpanded";
+    private static final String PATH_COST = "pathCost";
+    private static final String MAX_QUEUE_SIZE = "maxQueueSize";
+    private static final String NODES_EXPANDED = "nodesExpanded";
     
     private final TwoDimensionalMap _state;
     private final int _size;
@@ -86,12 +86,13 @@ public class SearchTest
                 current = movement.translate(current);
                 image.setRGB(current.getY(), current.getX(), Color.red.getRGB());
             }
-            ImageIO.write(image, "png", new File(String.format("N%s-%s-P%.5g.png", result.Size, result.Name, result.PathCost)));
+            result.ImagePath = String.format("N%s-%s-P%.5g.png", result.Size, result.Name, result.PathCost);
+            ImageIO.write(image, "png", new File(result.ImagePath));
         }
         return result;
     }
 
-    public class Result
+    public final class Result
     {
         public int Size;
         public String Name;
@@ -100,5 +101,6 @@ public class SearchTest
         public int ExpandedNodes;
         public int PathSize;
         public double PathCost;
+        public String ImagePath;
     }
 }
