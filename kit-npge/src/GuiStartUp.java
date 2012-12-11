@@ -79,8 +79,8 @@ class Gui extends JFrame
 
 class Model
 {
-    public int MinDimension = 500;
-    public int MaxDimension = 500;
+    public int MinDimension = 10;
+    public int MaxDimension = 10;
     public int Increment = 1;
     public double Obstacles = 0.25d;
     public Map<String, Search> Strategies = new TreeMap<String, Search>();
@@ -104,7 +104,8 @@ class Model
             while (dimension <= MaxDimension && !strategies.isEmpty())
             {
                 final long map_create_start = System.currentTimeMillis();
-                final TwoDimensionalMap state = TwoDimensionalMapFactory.create(dimension, Obstacles);
+                final TwoDimensionalMap state = TwoDimensionalMapFactory.createAssignmentMap(dimension);
+                //final TwoDimensionalMap state = TwoDimensionalMapFactory.create(dimension, Obstacles);
                 final long map_create_end = System.currentTimeMillis();
                 System.out.printf("Dimension %s x %s map created in %s ms%n", dimension, dimension, (map_create_end - map_create_start));
 

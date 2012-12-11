@@ -80,6 +80,7 @@ public final class SearchTest
                 }
             }
             Point current = space.getStart();
+            image.setRGB(current.getY(), current.getX(), Color.red.getRGB());
             for (final Action action : agent.getActions())
             {
                 final MoveDirectionAction movement = (MoveDirectionAction) action;

@@ -15,17 +15,34 @@ public final class TwoDimensionalMapFactory
 
     public static final Random rng = new Random();
     public static final double OBSTACLE_DENSITY_PCT = 0.25d;
-
+    
+    public static final TwoDimensionalMap createAssignmentMap(int size)
+    {
+        System.out.printf("TwoDimensionalMapFactory: allocating memory for dimension %s ...", size);
+        final TwoDimensionalSpace space = createSpace(size);
+        System.out.printf("done%n");
+        
+        System.out.printf("TwoDimensionalMapFactory: generating random map ...");
+        final TwoDimensionalMap map = new TwoDimensionalMap(space);
+        final Point finish = map.getFinish();
+        final Point start = map.getStart();
+        for(int column = 0; column < space.getColumns() - 1; column++)
+        {
+            space.setValue(finish.getX() + 1, column, TwoDimensionalSpace.OBSTACLE);
+        }
+        for(int row = finish.getX() + 1; row < space.getRows() - 1; row++)
+        {
+            space.setValue(row, space.getColumns() - 2, TwoDimensionalSpace.OBSTACLE);
+        }
+        space.setValue(start.getX(), space.getColumns() - 3, TwoDimensionalSpace.OBSTACLE);
+        System.out.printf("done%n");
+        
+        return map;
+    }
+    
     public static final TwoDimensionalMap create(int size)
     {
         return create(size, OBSTACLE_DENSITY_PCT);
-    }
-
-    private static final TwoDimensionalSpace createSpace(int size)
-    {
-        if (size < 100)
-            return new TwoDimensionalSpaceUsingArrays(size, size);
-        return new TwoDimensionalSpaceUsingBits(size, size);
     }
 
     public static final TwoDimensionalMap create(final int size, final double density)
@@ -38,12 +55,20 @@ public final class TwoDimensionalMapFactory
         final TwoDimensionalMap map = new TwoDimensionalMap(space);
         // i know, abstract factory pattern...
         generateMapSimple(space, map, density);
+        //generateMapMedium(space, map, density);
         //generateMapLarge(space, map, density);
         System.out.printf("done%n");
         
         return map;
     }
 
+    private static final TwoDimensionalSpace createSpace(int size)
+    {
+        if (size < 100)
+            return new TwoDimensionalSpaceUsingArrays(size, size);
+        return new TwoDimensionalSpaceUsingBits(size, size);
+    }
+    
     private static void generateMapSimple(final TwoDimensionalSpace space, final TwoDimensionalMap map, final double density)
     {
         final Point start = map.getStart();
